@@ -1,408 +1,585 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>WHO? — Tattoo Almaty</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #050505;
-            color: #f5f5f5;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* ---------- HEADER ---------- */
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 22px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #222;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        nav {
-            display: flex;
-            gap: 28px;
-            font-size: 13px;
-            text-transform: uppercase;
-        }
-
-        nav a {
-            color: #aaa;
-            transition: 0.2s;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        /* ---------- HERO ---------- */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 120px 6% 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border: 1px solid #222;
-            border-radius: 50%;
-            right: -200px;
-            bottom: -200px;
-        }
-
-        .small-title {
-            color: #777;
-            font-size: 12px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(90px, 20vw, 260px);
-            line-height: 0.75;
-            letter-spacing: -12px;
-            font-weight: 900;
-            margin-left: -10px;
-        }
-
-        .hero-text {
-            max-width: 450px;
-            margin-top: 55px;
-            color: #999;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 30px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 25px;
-            border: 1px solid white;
-            font-size: 12px;
-            text-transform: uppercase;
-            transition: 0.25s;
-        }
-
-        .button:hover {
-            background: white;
-            color: black;
-        }
-
-        .button.dark {
-            border-color: #333;
-            color: #888;
-        }
-
-        .button.dark:hover {
-            background: #111;
-            color: white;
-        }
-
-        /* ---------- SECTIONS ---------- */
-
-        section {
-            padding: 110px 6%;
-            border-top: 1px solid #1d1d1d;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            margin-bottom: 50px;
-        }
-
-        .section-number {
-            color: #555;
-            font-size: 12px;
-        }
-
-        h2 {
-            font-size: clamp(40px, 7vw, 90px);
-            letter-spacing: -5px;
-            line-height: 0.9;
-        }
-
-        /* ---------- WORKS ---------- */
-
-        .works {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .work {
-            aspect-ratio: 1 / 1;
-            background: #111;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .work img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: 0.5s;
-        }
-
-        .work:hover img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
-
-        .work-label {
-            position: absolute;
-            left: 15px;
-            bottom: 15px;
-            background: #050505;
-            padding: 8px 12px;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
-
-        /* ---------- PRICES ---------- */
-
-        .prices {
-            max-width: 900px;
-        }
-
-        .price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 0;
-            border-bottom: 1px solid #222;
-        }
-
-        .price-name {
-            font-size: 18px;
-        }
-
-        .price-value {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .price-description {
-            color: #666;
-            font-size: 12px;
-            margin-top: 7px;
-        }
-
-        /* ---------- ABOUT ---------- */
-
-        .about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        .about-text {
-            color: #999;
-            line-height: 1.8;
-            font-size: 16px;
-        }
-
-        .about-big {
-            font-size: clamp(35px, 5vw, 65px);
-            line-height: 1;
-            letter-spacing: -3px;
-        }
-
-        /* ---------- PROCESS ---------- */
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .step {
-            border: 1px solid #222;
-            padding: 30px;
-            min-height: 220px;
-        }
-
-        .step-number {
-            color: #555;
-            font-size: 12px;
-        }
-
-        .step h3 {
-            margin-top: 60px;
-            font-size: 20px;
-        }
-
-        .step p {
-            color: #777;
-            font-size: 13px;
-            line-height: 1.5;
-            margin-top: 12px;
-        }
-
-        /* ---------- CARE ---------- */
-
-        .care {
-            max-width: 850px;
-        }
-
-        .care p {
-            color: #999;
-            line-height: 1.8;
-            margin-top: 25px;
-        }
-
-        /* ---------- CONTACT ---------- */
-
-        .contact {
-            min-height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact h2 {
-            font-size: clamp(55px, 10vw, 150px);
-        }
-
-        .contact-subtitle {
-            color: #777;
-            margin-top: 30px;
-            max-width: 450px;
-            line-height: 1.6;
-        }
-
-        .contacts {
-            display: flex;
-            gap: 12px;
-            margin-top: 35px;
-        }
-
-        /* ---------- FOOTER ---------- */
-
-        footer {
-            padding: 30px 6%;
-            border-top: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-            color: #555;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        /* ---------- MOBILE ---------- */
-
-        @media (max-width: 700px) {
-
-            header {
-                padding: 18px 5%;
-            }
-
-            nav {
-                display: none;
-            }
-
-            .hero {
-                padding-left: 5%;
-                padding-right: 5%;
-            }
-
-            .hero h1 {
-                font-size: 32vw;
-                letter-spacing: -7px;
-            }
-
-            section {
-                padding: 80px 5%;
-            }
-
-            .section-header {
-                margin-bottom: 30px;
-            }
-
-            .works {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .about {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .steps {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .step {
-                padding: 20px;
-                min-height: 180px;
-            }
-
-            .step h3 {
-                margin-top: 35px;
-            }
-
-            .contacts {
-                flex-direction: column;
-            }
-
-            .button {
-                text-align: center;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WHO? — Tattoo Almaty</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050505;
+    color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+::selection {
+    background: white;
+    color: black;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+
+    background: rgba(5,5,5,.75);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #202020;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #777;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+    padding: 120px 5% 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    right: -150px;
+    bottom: -250px;
+
+    width: 600px;
+    height: 600px;
+
+    border: 1px solid #222;
+    border-radius: 50%;
+}
+
+.hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 70px;
+    border: 1px solid #171717;
+    border-radius: 50%;
+}
+
+.hero-top {
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(100px, 22vw, 300px);
+    line-height: .72;
+    letter-spacing: -14px;
+    font-weight: 900;
+
+    position: relative;
+    z-index: 2;
+}
+
+.hero-sub {
+    margin-top: 60px;
+    max-width: 470px;
+
+    color: #888;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 150px;
+    padding: 15px 25px;
+
+    border: 1px solid white;
+
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: .25s;
+}
+
+.btn:hover {
+    background: white;
+    color: black;
+}
+
+.btn.secondary {
+    border-color: #333;
+    color: #777;
+}
+
+.btn.secondary:hover {
+    background: #111;
+    color: white;
+}
+
+/* ================= GENERAL ================= */
+
+section {
+    padding: 120px 5%;
+    border-top: 1px solid #1d1d1d;
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    margin-bottom: 55px;
+}
+
+.section-head h2 {
+    font-size: clamp(45px, 8vw, 110px);
+    letter-spacing: -7px;
+    line-height: .8;
+}
+
+.section-number {
+    color: #555;
+    font-size: 10px;
+}
+
+/* ================= WORKS ================= */
+
+.works {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px;
+}
+
+.work {
+    background: #111;
+    overflow: hidden;
+    position: relative;
+}
+
+.work:nth-child(1) {
+    grid-column: span 7;
+    aspect-ratio: 1.2;
+}
+
+.work:nth-child(2) {
+    grid-column: span 5;
+    aspect-ratio: .9;
+}
+
+.work:nth-child(3),
+.work:nth-child(4),
+.work:nth-child(5),
+.work:nth-child(6) {
+    grid-column: span 3;
+    aspect-ratio: 1;
+}
+
+.work img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    filter: grayscale(100%);
+    transition: .5s;
+}
+
+.work:hover img {
+    filter: grayscale(0);
+    transform: scale(1.04);
+}
+
+.work-title {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+
+    background: #050505;
+    padding: 8px 11px;
+
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+/* ================= ABOUT ================= */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+}
+
+.about-big {
+    font-size: clamp(35px, 5vw, 70px);
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.about-text {
+    max-width: 500px;
+    color: #888;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.about-text strong {
+    color: white;
+}
+
+/* ================= PRICES ================= */
+
+.price-list {
+    max-width: 1000px;
+}
+
+.price {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    align-items: center;
+
+    padding: 28px 0;
+    border-bottom: 1px solid #222;
+}
+
+.price-num {
+    color: #555;
+    font-size: 11px;
+}
+
+.price-name {
+    font-size: 20px;
+}
+
+.price-info {
+    color: #555;
+    font-size: 11px;
+    margin-top: 7px;
+}
+
+.price-value {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ================= PROCESS ================= */
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.step {
+    min-height: 260px;
+    padding: 25px;
+
+    border: 1px solid #222;
+
+    transition: .3s;
+}
+
+.step:hover {
+    border-color: #555;
+}
+
+.step-number {
+    color: #555;
+    font-size: 11px;
+}
+
+.step h3 {
+    margin-top: 90px;
+    font-size: 22px;
+}
+
+.step p {
+    margin-top: 12px;
+
+    color: #666;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* ================= SKETCHES ================= */
+
+.sketches {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.sketch {
+    min-height: 350px;
+    background: #0d0d0d;
+
+    border: 1px solid #222;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 25px;
+}
+
+.sketch-number {
+    color: #555;
+    font-size: 10px;
+}
+
+.sketch-name {
+    font-size: 30px;
+    letter-spacing: -2px;
+}
+
+.sketch-status {
+    color: #666;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+/* ================= CARE ================= */
+
+.care {
+    max-width: 850px;
+}
+
+.care-title {
+    font-size: clamp(35px, 6vw, 70px);
+    letter-spacing: -4px;
+    line-height: .9;
+}
+
+.care-text {
+    margin-top: 35px;
+    color: #888;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    min-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-small {
+    color: #555;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.contact h2 {
+    margin-top: 20px;
+
+    font-size: clamp(70px, 15vw, 200px);
+    letter-spacing: -12px;
+    line-height: .7;
+}
+
+.contact-text {
+    max-width: 430px;
+    margin-top: 60px;
+
+    color: #777;
+    line-height: 1.6;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 30px 5%;
+
+    border-top: 1px solid #222;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #444;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    header {
+        height: 60px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+        font-size: 31vw;
+        letter-spacing: -8px;
+    }
+
+    .hero-sub {
+        margin-top: 45px;
+        font-size: 13px;
+    }
+
+    section {
+        padding: 80px 5%;
+    }
+
+    .section-head {
+        margin-bottom: 35px;
+    }
+
+    .section-head h2 {
+        font-size: 15vw;
+        letter-spacing: -5px;
+    }
+
+    .works {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .work:nth-child(1),
+    .work:nth-child(2) {
+        grid-column: span 2;
+    }
+
+    .work:nth-child(n+3) {
+        grid-column: span 1;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .about-big {
+        font-size: 11vw;
+    }
+
+    .steps {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .step {
+        min-height: 210px;
+        padding: 18px;
+    }
+
+    .step h3 {
+        margin-top: 55px;
+        font-size: 18px;
+    }
+
+    .sketches {
+        grid-template-columns: 1fr;
+    }
+
+    .sketch {
+        min-height: 250px;
+    }
+
+    .price {
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+    }
+
+    .price-value {
+        grid-column: 2;
+        font-size: 16px;
+    }
+
+    .contact h2 {
+        font-size: 25vw;
+        letter-spacing: -7px;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -410,42 +587,47 @@
 <!-- HEADER -->
 
 <header>
+
     <a href="#" class="logo">WHO?</a>
 
     <nav>
         <a href="#works">Работы</a>
+        <a href="#about">Я</a>
         <a href="#prices">Цены</a>
-        <a href="#about">Обо мне</a>
+        <a href="#process">Процесс</a>
         <a href="#contact">Запись</a>
     </nav>
+
 </header>
 
 
 <!-- HERO -->
 
-<main>
-
 <section class="hero">
 
-    <div class="small-title">
-        Tattoo artist / Almaty
+    <div class="hero-bg"></div>
+
+    <div class="hero-top">
+        Tattoo artist / Almaty / Kazakhstan
     </div>
 
     <h1>WHO?</h1>
 
-    <p class="hero-text">
+    <p class="hero-sub">
         Татуировки без попытки понравиться всем.
         Своя идея. Свой стиль. Своя история.
     </p>
 
-    <div class="hero-buttons">
-        <a href="#contact" class="button">
+    <div class="buttons">
+
+        <a href="#contact" class="btn">
             Записаться
         </a>
 
-        <a href="#works" class="button dark">
+        <a href="#works" class="btn secondary">
             Смотреть работы
         </a>
+
     </div>
 
 </section>
@@ -455,91 +637,82 @@
 
 <section id="works">
 
-    <div class="section-header">
+    <div class="section-head">
+
         <h2>РАБОТЫ</h2>
-        <span class="section-number">01 / 06</span>
+
+        <span class="section-number">
+            01 / 06
+        </span>
+
     </div>
+
 
     <div class="works">
 
-        <!-- ЗАМЕНИ КАРТИНКИ НА СВОИ -->
-
         <div class="work">
-            <img src="https://images.unsplash.com/photo-1598373182133-52452f7691ef?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Blackwork</div>
-        </div>
 
-        <div class="work">
-            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Graphic</div>
-        </div>
+            <img src="https://images.unsplash.com/photo-1598373182133-52452f7691ef?auto=format&fit=crop&w=1200&q=80">
 
-        <div class="work">
-            <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703c?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Blackwork</div>
-        </div>
-
-        <div class="work">
-            <img src="https://images.unsplash.com/photo-1542727365-19732a80dcfd?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Linework</div>
-        </div>
-
-        <div class="work">
-            <img src="https://images.unsplash.com/photo-1590246814883-57c511e3f7f9?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Dark</div>
-        </div>
-
-        <div class="work">
-            <img src="https://images.unsplash.com/photo-1582142407894-ec85a126c0a1?auto=format&fit=crop&w=900&q=80">
-            <div class="work-label">Custom</div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PRICES -->
-
-<section id="prices">
-
-    <div class="section-header">
-        <h2>ЦЕНЫ</h2>
-        <span class="section-number">02 / 06</span>
-    </div>
-
-    <div class="prices">
-
-        <div class="price">
-            <div>
-                <div class="price-name">Маленькая</div>
-                <div class="price-description">До 5 см</div>
+            <div class="work-title">
+                Blackwork
             </div>
-            <div class="price-value">10 000 ₸</div>
+
         </div>
 
-        <div class="price">
-            <div>
-                <div class="price-name">Небольшая</div>
-                <div class="price-description">5–10 см</div>
+
+        <div class="work">
+
+            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="work-title">
+                Graphic
             </div>
-            <div class="price-value">18 000 ₸</div>
+
         </div>
 
-        <div class="price">
-            <div>
-                <div class="price-name">Средняя</div>
-                <div class="price-description">10–15 см</div>
+
+        <div class="work">
+
+            <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703c?auto=format&fit=crop&w=800&q=80">
+
+            <div class="work-title">
+                Blackwork
             </div>
-            <div class="price-value">25 000 ₸</div>
+
         </div>
 
-        <div class="price">
-            <div>
-                <div class="price-name">Большая</div>
-                <div class="price-description">15+ см / сложные проекты</div>
+
+        <div class="work">
+
+            <img src="https://images.unsplash.com/photo-1542727365-19732a80dcfd?auto=format&fit=crop&w=800&q=80">
+
+            <div class="work-title">
+                Linework
             </div>
-            <div class="price-value">от 40 000 ₸</div>
+
+        </div>
+
+
+        <div class="work">
+
+            <img src="https://images.unsplash.com/photo-1590246814883-57c511e3f7f9?auto=format&fit=crop&w=800&q=80">
+
+            <div class="work-title">
+                Dark
+            </div>
+
+        </div>
+
+
+        <div class="work">
+
+            <img src="https://images.unsplash.com/photo-1582142407894-ec85a126c0a1?auto=format&fit=crop&w=800&q=80">
+
+            <div class="work-title">
+                Custom
+            </div>
+
         </div>
 
     </div>
@@ -551,22 +724,30 @@
 
 <section id="about">
 
-    <div class="section-header">
+    <div class="section-head">
+
         <h2>WHO AM I?</h2>
-        <span class="section-number">03 / 06</span>
+
+        <span class="section-number">
+            02 / 06
+        </span>
+
     </div>
+
 
     <div class="about">
 
         <div class="about-big">
-            Я не просто набиваю картинки.
-            Я помогаю превратить идею в то,
-            что останется с тобой.
+
+            Я не просто
+            набиваю картинки.
+
         </div>
+
 
         <div class="about-text">
 
-            Меня зовут Ринат.
+            Меня зовут <strong>Ринат</strong>.
 
             <br><br>
 
@@ -577,14 +758,144 @@
             <br><br>
 
             Для меня татуировка — это не конвейер.
-            Поэтому я стараюсь работать с каждой
-            идеей индивидуально.
+            Каждая идея должна выглядеть так,
+            будто она принадлежит именно тебе.
 
             <br><br>
 
-            Если у тебя есть идея — даже если
-            ты пока не знаешь, как она должна выглядеть —
-            можем придумать её вместе.
+            У тебя уже есть идея?
+            Отлично.
+
+            <br>
+
+            Нет идеи, но хочется тату?
+            Тоже отлично.
+
+            <br><br>
+
+            Разберёмся вместе.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRICES -->
+
+<section id="prices">
+
+    <div class="section-head">
+
+        <h2>ЦЕНЫ</h2>
+
+        <span class="section-number">
+            03 / 06
+        </span>
+
+    </div>
+
+
+    <div class="price-list">
+
+
+        <div class="price">
+
+            <div class="price-num">
+                01
+            </div>
+
+            <div>
+
+                <div class="price-name">
+                    Маленькая
+                </div>
+
+                <div class="price-info">
+                    До 5 см
+                </div>
+
+            </div>
+
+            <div class="price-value">
+                10 000 ₸
+            </div>
+
+        </div>
+
+
+        <div class="price">
+
+            <div class="price-num">
+                02
+            </div>
+
+            <div>
+
+                <div class="price-name">
+                    Небольшая
+                </div>
+
+                <div class="price-info">
+                    5–10 см
+                </div>
+
+            </div>
+
+            <div class="price-value">
+                18 000 ₸
+            </div>
+
+        </div>
+
+
+        <div class="price">
+
+            <div class="price-num">
+                03
+            </div>
+
+            <div>
+
+                <div class="price-name">
+                    Средняя
+                </div>
+
+                <div class="price-info">
+                    10–15 см
+                </div>
+
+            </div>
+
+            <div class="price-value">
+                25 000 ₸
+            </div>
+
+        </div>
+
+
+        <div class="price">
+
+            <div class="price-num">
+                04
+            </div>
+
+            <div>
+
+                <div class="price-name">
+                    Большая
+                </div>
+
+                <div class="price-info">
+                    15+ см / сложные проекты
+                </div>
+
+            </div>
+
+            <div class="price-value">
+                от 40 000 ₸
+            </div>
 
         </div>
 
@@ -595,49 +906,158 @@
 
 <!-- PROCESS -->
 
-<section>
+<section id="process">
 
-    <div class="section-header">
+    <div class="section-head">
+
         <h2>ПРОЦЕСС</h2>
-        <span class="section-number">04 / 06</span>
+
+        <span class="section-number">
+            04 / 06
+        </span>
+
     </div>
+
 
     <div class="steps">
 
+
         <div class="step">
-            <span class="step-number">01</span>
+
+            <span class="step-number">
+                01
+            </span>
+
             <h3>ИДЕЯ</h3>
+
             <p>
-                Ты рассказываешь, что хочешь.
-                Можно даже просто показать референсы.
+                Рассказываешь, что хочешь.
+                Можно показать референсы.
             </p>
+
         </div>
 
+
         <div class="step">
-            <span class="step-number">02</span>
+
+            <span class="step-number">
+                02
+            </span>
+
             <h3>ЭСКИЗ</h3>
+
             <p>
-                Обсуждаем композицию,
-                размер и место нанесения.
+                Обсуждаем размер,
+                место и композицию.
             </p>
+
         </div>
 
+
         <div class="step">
-            <span class="step-number">03</span>
+
+            <span class="step-number">
+                03
+            </span>
+
             <h3>СЕАНС</h3>
+
             <p>
-                Подготавливаем кожу,
-                переносим эскиз и делаем тату.
+                Переносим эскиз
+                и создаём татуировку.
             </p>
+
         </div>
 
+
         <div class="step">
-            <span class="step-number">04</span>
+
+            <span class="step-number">
+                04
+            </span>
+
             <h3>УХОД</h3>
+
             <p>
-                После сеанса ты получаешь
+                После сеанса получаешь
                 инструкцию по уходу.
             </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SKETCHES -->
+
+<section>
+
+    <div class="section-head">
+
+        <h2>ЭСКИЗЫ</h2>
+
+        <span class="section-number">
+            05 / 06
+        </span>
+
+    </div>
+
+
+    <div class="sketches">
+
+
+        <div class="sketch">
+
+            <span class="sketch-number">
+                DESIGN / 001
+            </span>
+
+            <div class="sketch-name">
+                BLACK<br>
+                HOLE
+            </div>
+
+            <span class="sketch-status">
+                Available
+            </span>
+
+        </div>
+
+
+        <div class="sketch">
+
+            <span class="sketch-number">
+                DESIGN / 002
+            </span>
+
+            <div class="sketch-name">
+                DEMON<br>
+                EYE
+            </div>
+
+            <span class="sketch-status">
+                Available
+            </span>
+
+        </div>
+
+
+        <div class="sketch">
+
+            <span class="sketch-number">
+                DESIGN / 003
+            </span>
+
+            <div class="sketch-name">
+                UNKNOWN
+            </div>
+
+            <span class="sketch-status">
+                Coming soon
+            </span>
+
         </div>
 
     </div>
@@ -649,33 +1069,38 @@
 
 <section>
 
-    <div class="section-header">
+    <div class="section-head">
+
         <h2>УХОД</h2>
-        <span class="section-number">05 / 06</span>
+
+        <span class="section-number">
+            INFO
+        </span>
+
     </div>
+
 
     <div class="care">
 
-        <p>
-            Первые дни после нанесения татуировки —
-            самые важные.
-        </p>
+        <div class="care-title">
+            НОВАЯ ТАТУИРОВКА —
+            НОВАЯ ОТВЕТСТВЕННОСТЬ.
+        </div>
 
-        <p>
+        <div class="care-text">
+
+            Первые дни особенно важны.
             Не трогай тату грязными руками,
-            не сдирай корочки, избегай бассейна,
-            сауны и длительного контакта с водой.
-        </p>
+            не сдирай корочки и избегай
+            бассейна, сауны и длительного
+            контакта с водой.
 
-        <p>
-            Используй средство для ухода,
-            которое рекомендует мастер.
-        </p>
+            <br><br>
 
-        <p>
-            Полная инструкция по уходу
-            будет выдаваться после сеанса.
-        </p>
+            После сеанса ты получишь
+            подробную инструкцию по уходу.
+
+        </div>
 
     </div>
 
@@ -686,52 +1111,60 @@
 
 <section id="contact" class="contact">
 
-    <div class="section-number">
-        06 / 06
+    <div class="contact-small">
+        Almaty / WHO? / Tattoo
     </div>
 
     <h2>ГОТОВ?</h2>
 
-    <p class="contact-subtitle">
-        Расскажи, что хочешь набить.
+    <p class="contact-text">
+
+        Расскажи, какую татуировку хочешь.
         Даже если у тебя пока только
         примерная идея.
+
     </p>
 
-    <div class="contacts">
 
-        <!-- ЗАМЕНИ ССЫЛКИ НА СВОИ -->
+    <div class="contact-buttons">
 
         <a
+            class="btn"
             href="https://t.me/"
-            target="_blank"
-            class="button">
-            Telegram
+            target="_blank">
+
+            Telegram →
+
         </a>
 
+
         <a
+            class="btn secondary"
             href="https://instagram.com/"
-            target="_blank"
-            class="button">
-            Instagram
+            target="_blank">
+
+            Instagram →
+
         </a>
 
     </div>
 
 </section>
 
-</main>
-
 
 <!-- FOOTER -->
 
 <footer>
 
-    <span>WHO? Tattoo / Almaty</span>
+    <span>
+        WHO? / Tattoo artist / Almaty
+    </span>
 
-    <span>© 2026 WHO?</span>
+    <span>
+        © 2026 WHO?
+    </span>
 
 </footer>
 
 </body>
-      </html>
+</html>
