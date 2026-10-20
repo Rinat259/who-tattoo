@@ -668,70 +668,27 @@
         </p>
 
         <p>
-            Используй средство для ухода,
-            которое рекомендует мастер.
-        </p>
 
-        <p>
-            Полная инструкция по уходу
-            будет выдаваться после сеанса.
-        </p>
+<div class="contact-buttons">
 
-    </div>
+    <a
+        class="btn"
+        href="https://t.me/who_amf"
+        target="_blank"
+        rel="noopener noreferrer">
 
-</section>
+        Telegram →
 
+    </a>
 
-<!-- CONTACT -->
+    <a
+        class="btn secondary"
+        href="https://www.instagram.com/whoo_tattoo/"
+        target="_blank"
+        rel="noopener noreferrer">
 
-<section id="contact" class="contact">
+        Instagram →
 
-    <div class="section-number">
-        06 / 06
-    </div>
+    </a>
 
-    <h2>ГОТОВ?</h2>
-
-    <p class="contact-subtitle">
-        Расскажи, что хочешь набить.
-        Даже если у тебя пока только
-        примерная идея.
-    </p>
-
-    <div class="contacts">
-
-        <!-- ЗАМЕНИ ССЫЛКИ НА СВОИ -->
-
-        <a
-            href="https://t.me/"
-            target="_blank"
-            class="button">
-            Telegram
-        </a>
-
-        <a
-            href="https://instagram.com/"
-            target="_blank"
-            class="button">
-            Instagram
-        </a>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    <span>WHO? Tattoo / Almaty</span>
-
-    <span>© 2026 WHO?</span>
-
-</footer>
-
-</body>
-</html>
+</div>
